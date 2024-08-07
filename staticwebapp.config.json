@@ -1,6 +1,14 @@
 {
     "routes": [
       {
+        "route": "/",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/anonymous/*",
+        "allowedRoles": ["anonymous"]
+      },
+      {
         "route": "/authenticated/*",
         "allowedRoles": ["authenticated"]
       },
@@ -10,15 +18,24 @@
       }
     ],
     "auth": {
-        "identityProviders": {
-          "azureActiveDirectory": {
-            "registration": {
-              "openIdIssuer": "https://login.microsoftonline.com/6b28e42d-1eb6-44fb-96d3-c7c1656f7d76",
-              "clientIdSettingName": "AZURE_CLIENT_ID",
-              "clientSecretSettingName": "AZURE_CLIENT_SECRET"
-            },
-            "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+      "identityProviders": {
+        "azureActiveDirectory": {
+          "registration": {
+            "openIdIssuer": "https://login.microsoftonline.com/6b28e42d-1eb6-44fb-96d3-c7c1656f7d76",
+            "clientIdSettingName": "AZURE_CLIENT_ID",
+            "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+          },
+          "login": {
+            "loginParameters": [
+              "response_type=id_token",
+              "scope=openid profile"
+            ]
           }
         }
       }
+    },
+    "globalHeaders": {
+      "Access-Control-Allow-Origin": "*"
     }
+  }
+  
