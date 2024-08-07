@@ -1,5 +1,29 @@
 {
-    "navigationFallback": {
-        "rewrite": "/index.html"
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "allowedRoles": ["authenticated"]
     }
+  ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/.auth/login/aad",
+      "statusCode": 302
+    }
+  },
+  "auth": {
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/DirectoryIDHERE",
+          "clientIdSettingName": "de4575e9-024d-4281-b645-07f37ab7cae4",
+          "clientSecretSettingName": "xe-8Q~nU1shz_zlgFiZ8zgZtzn1MGCcGbD5dockV"
+        },
+        "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+      }
+    }
+  }
 }
