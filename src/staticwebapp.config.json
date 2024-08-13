@@ -28,7 +28,7 @@
           "login": {
             "loginParameters": [
               "response_type=id_token",
-              "scope=openid profile"
+              "scope=openid profile offline_access"
             ]
           }
         }
